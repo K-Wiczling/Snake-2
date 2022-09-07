@@ -1,6 +1,6 @@
 class Snake{
     constructor(){
-        this.direction = 0;
+        this.direction = 1;
         
         this.body = [];
         this.resetSnake();
@@ -44,3 +44,4 @@ class Snake{
         }
     }
 }
+export default Snake;
