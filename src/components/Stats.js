@@ -1,9 +1,9 @@
 import './Stats.css'
-const Stats = () =>  {
-
+const Stats = (props) =>  {
+    console.log(props);
     return (
         <div className="stats"  >
-            points
+           Points: {props.children}
         </div>
     );
 }

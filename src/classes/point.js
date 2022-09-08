@@ -4,11 +4,4 @@ export default class Point {
       this.x = x;
       this.y = y;
     }
-
-    GetX(){
-        return this.x;
-    }
-    GetY(){
-        return this.y;
-    }
   }

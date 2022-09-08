@@ -9,14 +9,15 @@ class Game extends Component {
   constructor(props){
     super(props)
     this.params = {
-      width: 600,
-      height: 400,
+      width: 800*1.6,
+      height: 800,
       gridSize: 10
     }
     this.gm = new GameMenager(this.params);
     this.refresher = null;
     this.state = {
-      toDraw: []
+      toDraw: [],
+      score: 1
     }
     
     this.keyPress = document.addEventListener("keydown", this.gm.KeyPressCalc);
@@ -25,13 +26,15 @@ class Game extends Component {
 }
 
   componentDidMount(){
-    this.gm.startGame();
+    this.gm.StartGame();
     this.Refresh();
     this.setState({toDraw: []})
   }
  
   Refresh = () =>{
-    let t = this.gm.gameLoop();
+    let t = this.gm.GameLoop();
+    if(this.state.score !== this.gm.score)
+      this.setState({score: this.gm.score})
     if(this.gm.isGamePlay)
       this.refresher = setTimeout(this.Refresh, 200);
     this.setState({toDraw: t})
@@ -43,10 +46,12 @@ class Game extends Component {
         <div className="game">
 
           <div className='wrapper br'>
-            <Stats/>
+            <Stats>
+              {this.state.score}
+            </Stats>
           </div>
             
-          <div className="wrapper">
+          <div className="wrapper bg-light-blue">
             <Canvas toDraw={this.state.toDraw} params={this.params}/>
           </div>
 
@@ -58,7 +63,6 @@ class Game extends Component {
     }
     else if (!t){
       return (
-       
           <Splash/>
         
       );
