@@ -8,12 +8,34 @@ import GameMenager from '../classes/gameMenager';
 class Game extends Component {
   constructor(props){
     super(props)
-    this.gm = new GameMenager(400, 600, 15);
+    this.params = {
+      width: 600,
+      height: 400,
+      gridSize: 10
+    }
+    this.gm = new GameMenager(this.params);
+    this.refresher = null;
+    this.state = {
+      toDraw: []
+    }
+    
+  }
+  componentDidMount(){
+    console.log("did");
     this.gm.startGame();
+    this.Refresh();
+    this.setState({toDraw: []})
+  }
+ 
+  Refresh = () =>{
+    let t = this.gm.gameLoop();
+    if(this.gm.isGamePlay)
+      this.refresher = setTimeout(this.Refresh, 250);
+    this.setState({toDraw: t})
   }
   render(){
     let t = true;
-    if(t){
+    // if(t){
       return (
         <div className="game">
 
@@ -22,7 +44,7 @@ class Game extends Component {
           </div>
             
           <div className="wrapper">
-            <Canvas toDraw={this.gm.ToDraw()}/>
+            <Canvas toDraw={this.state.toDraw} params={this.params}/>
           </div>
 
 
@@ -30,14 +52,14 @@ class Game extends Component {
         
       );
 
-    }
-    else if (!t){
-      return (
+    // }
+    // else if (!t){
+    //   return (
        
-          <Splash/>
+    //       <Splash/>
         
-      );
-    }
+    //   );
+    // }
   }
 }
 

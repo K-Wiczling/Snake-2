@@ -1,3 +1,4 @@
+import Point from "./point";
 class Snake{
     constructor(){
         this.direction = 1;
@@ -9,10 +10,10 @@ class Snake{
     resetSnake(){
         this.direction = 0;
         this.body = [
-            [50, 50],
-            [60, 50],
-            [70, 50],
-            [80, 50],
+            new Point(70,50),
+            new Point(80,50),
+            new Point(90,50),
+            new Point(100,50)
         ];
     }
     growSnake(points){
@@ -21,24 +22,24 @@ class Snake{
             return true;
     }
     changeSnake(){
-        let sTemp = this.body[0];
+        const sTemp = structuredClone(this.body[0]);
 
         switch (this.direction) {
-            case 0: sTemp[0] = sTemp[0] + 10; break;
-            case 1: sTemp[0] = sTemp[0] - 10; break;
-            case 2: sTemp[1] = sTemp[1] - 10; break;
-            case 3: sTemp[1] = sTemp[1] + 10; break;
+            case 0: sTemp.x = sTemp.x + 10; break;
+            case 1: sTemp.x = sTemp.x - 10; break;
+            case 2: sTemp.y = sTemp.y - 10; break;
+            case 3: sTemp.y = sTemp.y + 10; break;
         }
         for (let i = this.body.length - 1; i > 0; --i) {
-            this.body[i][0] = this.body[i - 1][0];
-            this.body[i][1] = this.body[i - 1][1];
+            this.body[i].x = this.body[i - 1].x;
+            this.body[i].y = this.body[i - 1].y;
         }
         this.body[0] = sTemp;
         
     }
     hitTail(){
         for (let i = 3; i < this.body.length; ++i) {
-            if (this.body[i][0] === this.body[0][0] && this.body[i][1] === this.body[0][1]) {
+            if (this.body[i].x === this.body[0].x && this.body[i].y === this.body[0].y) {
                 return true;
             }
         }
