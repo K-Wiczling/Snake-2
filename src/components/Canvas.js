@@ -1,5 +1,4 @@
 import React, {useRef, useEffect } from 'react';
-import GameMenager from '../classes/gameMenager';
 import './Canvas.css';
 
 const Canvas = ({toDraw, params}) =>  {
@@ -17,8 +16,8 @@ const Canvas = ({toDraw, params}) =>  {
         toDraw.forEach((draw) =>{
             context.fillRect(draw.x, draw.y, params.gridSize, params.gridSize)
         });  
-       
-    }, [toDraw])
+        
+    }, [toDraw, params])
 
     return (
         <canvas ref={canvasRef} className="play ba"></canvas>

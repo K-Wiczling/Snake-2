@@ -19,9 +19,12 @@ class Game extends Component {
       toDraw: []
     }
     
-  }
+    this.keyPress = document.addEventListener("keydown", this.gm.KeyPressCalc);
+    this.keyPress = document.addEventListener("touchstart", this.gm.TouchStart);
+    this.keyPress = document.addEventListener("touchend", this.gm.TouchEnd);
+}
+
   componentDidMount(){
-    console.log("did");
     this.gm.startGame();
     this.Refresh();
     this.setState({toDraw: []})
@@ -30,12 +33,12 @@ class Game extends Component {
   Refresh = () =>{
     let t = this.gm.gameLoop();
     if(this.gm.isGamePlay)
-      this.refresher = setTimeout(this.Refresh, 250);
+      this.refresher = setTimeout(this.Refresh, 200);
     this.setState({toDraw: t})
   }
   render(){
     let t = true;
-    // if(t){
+    if(t){
       return (
         <div className="game">
 
@@ -52,14 +55,14 @@ class Game extends Component {
         
       );
 
-    // }
-    // else if (!t){
-    //   return (
+    }
+    else if (!t){
+      return (
        
-    //       <Splash/>
+          <Splash/>
         
-    //   );
-    // }
+      );
+    }
   }
 }
 
