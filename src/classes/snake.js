@@ -11,10 +11,10 @@ class Snake{
     ResetSnake = () =>{
         this.direction = 0;
         this.body = [
-            new Point(7*this.gridSize,5*this.gridSize),
-            new Point(8*this.gridSize,5*this.gridSize),
+            new Point(10*this.gridSize,5*this.gridSize),
             new Point(9*this.gridSize,5*this.gridSize),
-            new Point(10*this.gridSize,5*this.gridSize)
+            new Point(8*this.gridSize,5*this.gridSize),
+            new Point(7*this.gridSize,5*this.gridSize)
         ];
     }
     //Run when get food to add one more pice to the body
@@ -25,8 +25,8 @@ class Snake{
     }
     //Move snake in the direction fo the movement
     ChangeSnake = () =>{
-        const sTemp = structuredClone(this.body[0]);
-
+        const sTemp = new Point(this.body[0].x, this.body[0].y)
+        
         switch (this.direction) {
             case 0: sTemp.x += this.gridSize; break;
             case 1: sTemp.x -= this.gridSize; break;
@@ -37,8 +37,7 @@ class Snake{
             this.body[i].x = this.body[i - 1].x;
             this.body[i].y = this.body[i - 1].y;
         }
-        this.body[0] = sTemp;
-        
+        this.body[0] = new Point(sTemp.x, sTemp.y) ;
     }
     //Chceck if snake actuly hit his tail
     HitTail = () =>{

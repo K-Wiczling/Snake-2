@@ -4,8 +4,9 @@ import './Canvas.css';
 const Canvas = ({toDraw, params}) =>  {
 
     const canvasRef = useRef(null)
-
+    
     useEffect(() => {
+        console.log('cnavas');
         const canvas = canvasRef.current
         canvas.width = params.width;
         canvas.height = params.height;
