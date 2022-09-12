@@ -55,13 +55,13 @@ class GameMenager{
                 }
                 this.food.GenerateFood();
             }
-            if (this.snake.body[0].x > this.width - 10 ) 
+            if (this.snake.body[0].x > this.width - this.gridSize ) 
                 this.EndGame("hit right");
 
             if (this.snake.body[0].x < 0 ) 
                 this.EndGame("hit left");
 
-            if (this.snake.body[0].y > this.height - 10 ) 
+            if (this.snake.body[0].y > this.height - this.gridSize ) 
                 this.EndGame("hit bottom");
 
             if (this.snake.body[0].y < 0) 
